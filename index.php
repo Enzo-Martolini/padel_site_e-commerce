@@ -11,10 +11,10 @@
     <?php 
     $product = getProduct();
     foreach ($product as $data){
-        if (strpos($data['subcategory'], 'head') !== false) {
-            echo $data['name'] . "</br></br>";
+       if (isset($data['img_src'])) {
+            echo '<img src="'. $data['img_src'].'"></br>' ;
+            echo $data['img_src'] . '</br>';
         }
-        
     }
     ?>
 </body>
