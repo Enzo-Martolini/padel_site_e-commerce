@@ -16,6 +16,9 @@
             echo $data['img_src'] . '</br>';
         }
     }
+    
+    session_start();
+    echo $_SESSION['name'];
     ?>
 </body>
 </html>
