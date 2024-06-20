@@ -1,0 +1,42 @@
+Fait
+
+Route produits
+Route post user
+Route connexion (une fois la connexion faite, les infos de l'utilisateur sont enregistrer dans des variables de sessions).
+
+A faire
+
+addToShopCard()
+    --> Ajouter un produit dans un panier en récuperant l'id de l'user. 
+        --> Si une entrée est déjà présente avec l'id, stock le produit dans l'entrée et la quantité désirée.
+        --> Si l'entrée n'est pas déjà présente alors il faut créer une entrée avec l'id du user, le produit à stocker et sa quantité.
+        --> Il faut verifier que la quantité demandé est egal ou inférieur au stock présent dans la bdd.
+
+getSizeByProduct()
+    --> Pour les chaussures il faut stocker plusieurs tailles avec l'id des chaussures + la quantité
+    --> Pour chaques id de produits si c'est une chaussure, récupère l'id, la taille demandée, et renvoie la quantité
+
+changePassword()
+    --> Récupère le password enregistré
+    --> Entre le mot de passe déjà enregistrer et verifie qu'il est pareil que dans la bdd
+    --> Entre un nouveau mot de passe
+    --> Update la table avec le nouveau mot de passe
+
+Class admin
+    --> Ajouter une fonction add() dans la table product pour ajouter un nouveau produit
+        --> La fonction doit recupérer en entrée name, description, price, category[], subcategory[], img_src(le chemin vers l'image stocké dans le dossier "backend/images/categorie_du_produit/produit_x.png")
+
+    --> Ajouter une fonction update()
+        --> La fonction doit récupérer l'id du produit à modifier et les elements à modifier (si certains elements ne sont pas modifiés, leurs valeurs doit rester la même).
+        --> La fonction doit ensuite update dans l'entrée correspondant à l'id, les elements qui ont été modifiés.
+
+    --> Ajouter une fonction remove()
+        --> La fonction doit remove l'entrée correspondant à l'id prise en entrée
+
+sold()
+    --> Dans un premier temps la fonction sold doit enregistrer dans une table, les achats fait par l'utilisateur.
+    --> Elle doit récupérer toutes les entrée présentes dans la shopCard, pour ensuite les entré une à une dans la table history.
+    --> Plus tard cette fonction servira à passer un paiement
+
+getUserPurchaseHistory()
+    --> Cette fonction doit renvoyer un tableau dans lequel toutes les entrées présente dans la table history.
