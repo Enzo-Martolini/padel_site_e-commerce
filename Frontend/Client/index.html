@@ -14,7 +14,12 @@
 
     <script type="module">
       import { AfficherHeader } from "./pages/Layout/components/Header.js";
-      AfficherHeader();
+  
+      document.addEventListener("DOMContentLoaded", () => {
+        const header = AfficherHeader();
+        document.body.appendChild(header);
+      });
     </script>
+     
   </body>
 </html>
