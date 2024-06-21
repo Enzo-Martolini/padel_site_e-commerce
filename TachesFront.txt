@@ -1,0 +1,106 @@
+/PAGE ACCUEIL/////////////
+
+Partie header:
+-> Header avec logo(qui redirige sur l'accueil)
+-> Les 4 liens vers nos produits(Raquettes, chaussures, sacs, balles)
+-> Un logo profil une border right pour réaliser une barre puis un logo panier
+
+Partie Body:
+-> Une barre de recherche, avec un systeme d'autocomplétion et bouton filtre(marques,produits,categories)
+-> Une banniere qui affiche un starter pack,
+ Apres un timer (3s l'image tourne et les derniers produits mis en ligne en image avec design figma)
+-> Un titre des produits phares puis afficher produits phares avec categories produits(regardez figma)
+-> Une bande avec les marques proposés du site(fixe ou en mouvement)
+
+Partie Footer:
+-> 3 div contenant chacune :
+1. Le logo, puis les 4 categories de produits en liens
+2. Au milieu, le panier avec logo en dessous profil avec logo et en dessous CGU
+3. Nos coordonnées, nous retrouvez avec en dessous l'adresse
+
+
+/PAGE PRODUITS///////////
+
+Header reprendre le même qu accueil
+
+Partie Body: 
+-> Une barre de recherche avec un bouton pour pouvoir filtrer
+-> En dessous Titre des produits de la page donc soit raquettes, chaussures, sacs, balles
+-> Affichage des produits sous forme de grid 3x3 au debut puis design si temps
+
+Footer reprendre le même qu accueil
+
+/PAGE DETAILS///////////////
+
+"Au clic de n'importe quel produits"
+
+Header pareil accueil
+
+Partie Body: 
+->A gauche la photo du produit
+-> A droite son nom, description, quantité, prix, bouton ajout panier
+-> Bouton ajout panier doit envoyer le produit dans le panier et dans la bdd
+
+
+Footer comme accueil
+
+/PAGE INSCRIPTION////////////
+
+Header 
+
+Body: 
+-> Titre s'inscrire
+-> Form avec prenom, nom, mail, mdp, verif mdp
+-> bouton s'inscrire qui enregistre les infos du user
+ et envoie sur la page connexion
+ -> Verification et sécutité sur chaque champs
+ -> Au submit user enregistrer dans la bdd
+
+ Footer
+
+ /PAGE CONNEXION///////////////
+
+ Header
+
+ Body: 
+ -> Titre connexion
+ -> Form avec mail et mdp , bouton connexion
+ -> Au submit redirection, vers la page d'accueil
+ -> Token de connexion pour que l'utilisateur reste connecté
+
+ Footer
+
+ /PAGE PROFIL/////////////////
+
+ Header
+
+ Body: 
+ -> Titre infos perso
+ -> Form des infos perso avec prenom, nom, mail, mdp fetch pour afficher donnees user
+ -> bouton pour modifier email, mdp
+ -> Sur le bouton une modal pour changer son mdp qui au submit va actualiser le mdp ou email
+ ->  Titre historique d'achats du user
+ -> Avec nom du produits, quantité, prix, status de la commande
+ -> Possibilité de consulté son panier (dans le header du coup)
+ 
+ Footer
+
+ /PANIER//////////////
+
+ -> Au clic sur le logo panier une sidebar qui apparait avec produits ajouter au panier
+ -> Possibilité de retirer son produit du panier, ou tout suprrimer
+ -> Possibilité également d'appuyer sur le bouton poursuivre l'achats
+ -> Qui redirige vers une page avec details commande, paiment etc a faire en dernier je pense
+
+
+
+ /PAGE ADMINISTRATEUR////////
+
+Header
+
+Body:
+-> Gestion des produits avec le back(Ajout, suppression, modification des produits, stocks)
+-> Gestion categories et sous categories de produits(Ajout, suppression, modif)
+
+Footer
+
