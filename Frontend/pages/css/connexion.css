@@ -20,7 +20,8 @@ body {
 }
 
 #form-connexion input[type="mail"]:focus,
-#form-connexion input[type="password"]:focus {
+#form-connexion input[type="password"]:focus, 
+#form-connexion input[type="text"]:focus{
     /* Réinitialisez les styles de bordure et d'ombre */
     border: none;
     outline: none;
