@@ -1,12 +1,14 @@
 /PAGE ACCUEIL/////////////
 
-Partie header:
+Partie header (en cours par Hugo):
 -> Header avec logo(qui redirige sur l'accueil)
 -> Les 4 liens vers nos produits(Raquettes, chaussures, sacs, balles)
 -> Un logo profil une border right pour réaliser une barre puis un logo panier
 
 Partie Body:
--> Une barre de recherche, avec un systeme d'autocomplétion et bouton filtre(marques,produits,categories)
+-> Une barre de recherche (design terminé),
+-> avec un systeme d'autocomplétion (En cours Enzo)
+-> et bouton filtre(marques,produits,categories)
 -> Une banniere qui affiche un starter pack,
  Apres un timer (3s l'image tourne et les derniers produits mis en ligne en image avec design figma)
 -> Un titre des produits phares puis afficher produits phares avec categories produits(regardez figma)
