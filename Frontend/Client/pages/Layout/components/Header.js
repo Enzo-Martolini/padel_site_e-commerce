@@ -157,7 +157,7 @@ export function AfficherHeader() {
   const cartLink = document.createElement("a");
   cartLink.href = "#";
   const cartIcon = document.createElement("img");
-  cartIcon.src = "../assets/icons8-shopping-cart-90.png";
+  cartIcon.src = "../assets/icon-shopping-cart.png";
   cartIcon.alt = "Cart";
   cartIcon.className = "h-8 px-2";
   cartLink.appendChild(cartIcon);
