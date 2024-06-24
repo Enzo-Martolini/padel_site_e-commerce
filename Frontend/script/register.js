@@ -1,9 +1,27 @@
 var mail = document.getElementById("mail_form");
 var password = document.getElementById("password_form");
+var name_form = document.getElementById("name_form");
+var surname = document.getElementById("surname_form");
+console.log("fonction atteinte")
 
-function validateForm(event) {
+document.addEventListener("click", function(event){
     var isValid = true;
 
+    console.log("fonction atteinte")
+
+    //Vérifie si le nom et prenom sont correcte
+    if (name_form.value !== "" && !/^[a-zA-Z\s]*$/.test(name_form.value)){
+        document.getElementById("error_name").textContent = "Le prenom entré ne doit pas contenir de carctères spéciaux ou d'accents";
+        name_form.style.borderColor = "red";
+        isValid = false
+    }
+    
+    if (surname.value !== "" && !/^[a-zA-Z\s]*$/.test(surname.value)){
+        document.getElementById("error_surname").textContent = "Le nom entré ne doit pas contenir de carctères spéciaux ou d'accents";
+        surname.style.borderColor = "red";
+        isValid = false
+
+    }
     // Vérifiez si le mail est valide
     if (mail.value !== "" && !/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(mail.value)){
         document.getElementById("error_mail").textContent = "Le mail doit être correct";
@@ -32,7 +50,7 @@ function validateForm(event) {
     if (!isValid && event) {
         event.preventDefault();
     }
-}
 
-document.getElementById('login_form').addEventListener('submit', validateForm);
-document.addEventListener("click", validateForm);
+});    
+
+// document.getElementById('login_form').addEventListener('submit', validateForm);
