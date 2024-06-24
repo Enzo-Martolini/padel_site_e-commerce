@@ -2,7 +2,8 @@
 export function createHoverModal(link, categories, brands) {
   // Create modal container
   const modalContainer = document.createElement("div");
-  modalContainer.className = "fixed flex items-center justify-center bg-opacity-50 hidden";
+  modalContainer.className =
+    "fixed flex items-center justify-center bg-opacity-50 hidden";
   modalContainer.style.zIndex = "1000";
 
   // Create modal content
@@ -67,7 +68,7 @@ export function createHoverModal(link, categories, brands) {
 
   // Show modal on hover
   let isMouseOverModal = false;
-  
+
   link.addEventListener("mouseover", () => {
     modalContainer.classList.remove("hidden");
   });
@@ -126,6 +127,21 @@ export function AfficherHeader() {
       link.classList.add("hover-link"); // Ajoutez la classe hover-link uniquement au lien "Raquettes"
       link.addEventListener("mouseover", () => {
         const categories = ["Femmes", "Hommes", "Enfants"];
+        const brands = [
+          "Head",
+          "BullPadel",
+          "Babolat",
+          "Kuikma",
+          "Nox",
+          "Adidas",
+        ];
+        createHoverModal(link, categories, brands);
+      });
+    }
+    if (text === "Sacs") {
+      link.classList.add("hover-link"); // Ajoutez la classe hover-link uniquement au lien "Raquettes"
+      link.addEventListener("mouseover", () => {
+        const categories = ["Femmes", "Hommes"];
         const brands = [
           "Head",
           "BullPadel",
