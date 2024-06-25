@@ -385,6 +385,7 @@ backgroundOverlay.addEventListener("click", () => {
   slideOverPanel.classList.add("hidden");
 });
 
+
 // Renvoyer l'en-tête
 return header;
 }
