@@ -26,7 +26,7 @@ export function createHoverModal(link, categories, brands) {
     const listItem = document.createElement("li");
     const linkItem = document.createElement("a");
     linkItem.href = `#${category.toLowerCase()}`;
-    linkItem.className = "text-blue-500 hover:underline";
+    linkItem.className = "text-black hover:underline";
     linkItem.textContent = category;
     listItem.appendChild(linkItem);
     categoriesList.appendChild(listItem);
@@ -46,7 +46,7 @@ export function createHoverModal(link, categories, brands) {
     const listItem = document.createElement("li");
     const linkItem = document.createElement("a");
     linkItem.href = `#${brand.toLowerCase()}`;
-    linkItem.className = "text-blue-500 hover:underline";
+    linkItem.className = "text-black hover:underline";
     linkItem.textContent = brand;
     listItem.appendChild(linkItem);
     brandsList.appendChild(listItem);
@@ -188,7 +188,7 @@ profileLink.appendChild(profileIcon);
 
 // Create the dropdown menu
 const dropdownMenu = document.createElement("div");
-dropdownMenu.className = "hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none";
+dropdownMenu.className = "hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none";
 dropdownMenu.setAttribute("role", "menu");
 dropdownMenu.setAttribute("aria-orientation", "vertical");
 dropdownMenu.setAttribute("aria-labelledby", "menu-button");
@@ -242,7 +242,7 @@ slideOverPanel.innerHTML = `
     <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
       <div class="relative w-screen max-w-lg">
-        <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
+        <div class="h-full flex flex-col py-6 bg-teal-50 shadow-xl overflow-y-scroll">
           <div class="px-4 sm:px-6">
             <div class="flex items-start justify-between">
               <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Mon Panier</h2>
@@ -260,20 +260,20 @@ slideOverPanel.innerHTML = `
             <!-- Shopping cart items -->
             <div class="absolute inset-0 px-4 sm:px-6">
               <div class="h-full" aria-hidden="true">
-                <ul role="list" class="divide-y divide-gray-200">
+                <ul role="list" class="divide-y divide-gray-200 border border-sky-900">
                   <li class="py-6 flex">
-                    <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                      <img src="https://via.placeholder.com/150" alt="Product Image" class="h-full w-full object-cover object-center">
+                    <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md  border-gray-200">
+                      <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
                     </div>
                     <div class="ml-4 flex flex-1 flex-col">
                       <div>
                         <div class="flex justify-between text-base font-medium text-gray-900">
                           <h3>
-                            <a href="#">Nom du Produit</a>
+                            <a href="#">Starter Pack BullPadel</a>
                           </h3>
-                          <p class="ml-4">$99.99</p>
+                          <p class="ml-4">200€</p>
                         </div>
-                        <p class="mt-1 text-sm text-gray-500">Description du Produit</p>
+                        <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
                       </div>
                       <div class="flex flex-1 items-end justify-between text-sm">
                         <p class="text-gray-500">Quantité: 1</p>
@@ -289,10 +289,18 @@ slideOverPanel.innerHTML = `
             </div>
             <!-- /End replace -->
           </div>
-        </div>
+          <div class="flex justify-center">
+    <div class="border-2 border-sky-900 rounded-lg inline-flex items-center justify-center">
+        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500 px-4 py-2">Poursuivre l'achat</button>
+    </div>
+</div>
+
+        
       </div>
+      
     </div>
   </div>
+  
 `;
 document.body.appendChild(slideOverPanel);
 
