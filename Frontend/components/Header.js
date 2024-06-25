@@ -153,8 +153,7 @@ export function AfficherHeader() {
       });
     }
 
-    
-   if (text === "Sacs") {
+    if (text === "Sacs") {
       link.classList.add("hover-link"); // Ajoutez la classe hover-link uniquement au lien "Raquettes"
       link.addEventListener("mouseover", () => {
         const categories = ["Femmes", "Hommes"];
@@ -169,33 +168,33 @@ export function AfficherHeader() {
         createHoverModal(link, categories, brands);
       });
     }
-
   });
 
   header.appendChild(navLinks);
 
   // Profile and Cart Icons
-const iconsContainer = document.createElement("div");
-iconsContainer.className = "flex space-x-4 relative"; // 'relative' added for dropdown positioning
+  const iconsContainer = document.createElement("div");
+  iconsContainer.className = "flex space-x-4 relative"; // 'relative' added for dropdown positioning
 
-const profileLink = document.createElement("a");
-profileLink.href = "#";
-const profileIcon = document.createElement("img");
-profileIcon.src = "../assets/icons8-user-96.png";
-profileIcon.alt = "Profile";
-profileIcon.className = "h-9 border-r-2 p-1 border-black size-9";
-profileLink.appendChild(profileIcon);
+  const profileLink = document.createElement("a");
+  profileLink.href = "#";
+  const profileIcon = document.createElement("img");
+  profileIcon.src = "../assets/icons8-user-96.png";
+  profileIcon.alt = "Profile";
+  profileIcon.className = "h-9 border-r-2 p-1 border-black size-9";
+  profileLink.appendChild(profileIcon);
 
-// Create the dropdown menu
-const dropdownMenu = document.createElement("div");
-dropdownMenu.className = "hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none";
-dropdownMenu.setAttribute("role", "menu");
-dropdownMenu.setAttribute("aria-orientation", "vertical");
-dropdownMenu.setAttribute("aria-labelledby", "menu-button");
-dropdownMenu.setAttribute("tabindex", "-1");
+  // Create the dropdown menu
+  const dropdownMenu = document.createElement("div");
+  dropdownMenu.className =
+    "hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none";
+  dropdownMenu.setAttribute("role", "menu");
+  dropdownMenu.setAttribute("aria-orientation", "vertical");
+  dropdownMenu.setAttribute("aria-labelledby", "menu-button");
+  dropdownMenu.setAttribute("tabindex", "-1");
 
-// Add the menu items
-dropdownMenu.innerHTML = `
+  // Add the menu items
+  dropdownMenu.innerHTML = `
   <div class="py-1" role="none">
     <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">Voir Profil</a>
     <form method="POST" action="#" role="none">
@@ -204,44 +203,44 @@ dropdownMenu.innerHTML = `
   </div>
 `;
 
-// Append the dropdown menu to the profile link container
-profileLink.appendChild(dropdownMenu);
-iconsContainer.appendChild(profileLink);
+  // Append the dropdown menu to the profile link container
+  profileLink.appendChild(dropdownMenu);
+  iconsContainer.appendChild(profileLink);
 
-// Cart Icon
-const cartLink = document.createElement("a");
-cartLink.href = "#";
-const cartIcon = document.createElement("img");
-cartIcon.src = "../assets/icons8-shopping-cart-90.png";
-cartIcon.alt = "Cart";
-cartIcon.className = "h-8 px-2";
-cartLink.appendChild(cartIcon);
-iconsContainer.appendChild(cartLink);
+  // Cart Icon
+  const cartLink = document.createElement("a");
+  cartLink.href = "#";
+  const cartIcon = document.createElement("img");
+  cartIcon.src = "../assets/icons8-shopping-cart-90.png";
+  cartIcon.alt = "Cart";
+  cartIcon.className = "h-8 px-2";
+  cartLink.appendChild(cartIcon);
+  iconsContainer.appendChild(cartLink);
 
-// Append iconsContainer to the header
-header.appendChild(iconsContainer);
+  // Append iconsContainer to the header
+  header.appendChild(iconsContainer);
 
-// Add event listener to toggle the dropdown menu
-profileLink.addEventListener("click", (event) => {
-  event.preventDefault();
-  dropdownMenu.classList.toggle("hidden");
-});
+  // Add event listener to toggle the dropdown menu
+  profileLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    dropdownMenu.classList.toggle("hidden");
+  });
 
-// Add a click listener to the document to close the dropdown when clicking outside
-document.addEventListener("click", (event) => {
-  if (!profileLink.contains(event.target)) {
-    dropdownMenu.classList.add("hidden");
-  }
-});
+  // Add a click listener to the document to close the dropdown when clicking outside
+  document.addEventListener("click", (event) => {
+    if (!profileLink.contains(event.target)) {
+      dropdownMenu.classList.add("hidden");
+    }
+  });
 
-// Create the slide over panel for the cart
+// Créer le panneau latéral pour le panier
 const slideOverPanel = document.createElement("div");
 slideOverPanel.className = "hidden fixed inset-0 overflow-hidden z-50";
 slideOverPanel.innerHTML = `
   <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div id="backgroundOverlay" class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
-      <div class="relative w-screen max-w-lg">
+      <div class="relative w-screen max-w-sm">
         <div class="h-full flex flex-col py-6 bg-teal-50 shadow-xl overflow-y-scroll">
           <div class="px-4 sm:px-6">
             <div class="flex items-start justify-between">
@@ -257,66 +256,135 @@ slideOverPanel.innerHTML = `
             </div>
           </div>
           <div class="mt-6 relative flex-1 px-4 sm:px-6">
-            <!-- Shopping cart items -->
-            <div class="absolute inset-0 px-4 sm:px-6">
-              <div class="h-full" aria-hidden="true">
-                <ul role="list" class="divide-y divide-gray-200 border border-sky-900">
-                  <li class="py-6 flex">
-                    <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md  border-gray-200">
-                      <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
-                    </div>
-                    <div class="ml-4 flex flex-1 flex-col">
-                      <div>
-                        <div class="flex justify-between text-base font-medium text-gray-900">
-                          <h3>
-                            <a href="#">Starter Pack BullPadel</a>
-                          </h3>
-                          <p class="ml-4">200€</p>
-                        </div>
-                        <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
+            <!-- Contenu du panier -->
+            <div class="absolute inset-0 px-4 sm:px-6 overflow-x-hidden" aria-hidden="true">
+              <ul role="list" class="divide-y divide-gray-200 border border-sky-900">
+                <!-- Articles du panier -->
+                <li class="py-6 flex">
+                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border-gray-200">
+                    <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
+                  </div>
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div class="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a href="#">Starter Pack BullPadel</a>
+                        </h3>
+                        <p class="ml-4">200€</p>
                       </div>
-                      <div class="flex flex-1 items-end justify-between text-sm">
-                        <p class="text-gray-500">Quantité: 1</p>
-                        <div class="flex">
-                          <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Supprimer</button>
-                        </div>
+                      <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
+                    </div>
+                    <div class="flex flex-1 items-end justify-between text-sm">
+                      <p class="text-gray-500">Quantité: 1</p>
+                      <div class="flex">
+                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Supprimer</button>
                       </div>
                     </div>
-                  </li>
-                  <!-- Add more items here -->
-                </ul>
-              </div>
+                  </div>
+                </li>
+                <!-- (Autres articles) -->
+                <li class="py-6 flex">
+                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border-gray-200">
+                    <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
+                  </div>
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div class="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a href="#">Starter Pack BullPadel</a>
+                        </h3>
+                        <p class="ml-4">200€</p>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
+                    </div>
+                    <div class="flex flex-1 items-end justify-between text-sm">
+                      <p class="text-gray-500">Quantité: 1</p>
+                      <div class="flex">
+                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Supprimer</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="py-6 flex">
+                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border-gray-200">
+                    <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
+                  </div>
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div class="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a href="#">Starter Pack BullPadel</a>
+                        </h3>
+                        <p class="ml-4">200€</p>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
+                    </div>
+                    <div class="flex flex-1 items-end justify-between text-sm">
+                      <p class="text-gray-500">Quantité: 1</p>
+                      <div class="flex">
+                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Supprimer</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="py-6 flex">
+                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border-gray-200">
+                    <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
+                  </div>
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div class="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a href="#">Starter Pack BullPadel</a>
+                        </h3>
+                        <p class="ml-4">200€</p>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
+                    </div>
+                    <div class="flex flex-1 items-end justify-between text-sm">
+                      <p class="text-gray-500">Quantité: 1</p>
+                      <div class="flex">
+                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Supprimer</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
-            <!-- /End replace -->
           </div>
-          <div class="flex justify-center">
-    <div class="border-2 border-sky-900 rounded-lg inline-flex items-center justify-center">
-        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500 px-4 py-2">Poursuivre l'achat</button>
-    </div>
-</div>
-
-        
+          <!-- Bouton sous les articles du panier -->
+          <div class="mt-6 flex justify-center px-4 sm:px-6">
+            <div class="border-2 border-sky-900 rounded-lg inline-flex items-center justify-center">
+              <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500 px-4 py-2">Poursuivre l'achat</button>
+            </div>
+          </div>
+        </div>
       </div>
-      
     </div>
   </div>
-  
 `;
+
+// Ajouter le panneau latéral au corps du document
 document.body.appendChild(slideOverPanel);
 
-// Add event listener to show the slide over panel when the cart icon is clicked
+// Écouteur d'événement pour afficher le panneau latéral lorsque l'icône du panier est cliquée
 cartLink.addEventListener("click", (event) => {
   event.preventDefault();
   slideOverPanel.classList.remove("hidden");
 });
 
-// Add event listener to close the slide over panel
+// Écouteur d'événement pour fermer le panneau latéral lorsque le bouton de fermeture est cliqué
 const closeSlideOverButton = document.getElementById("close-slide-over");
 closeSlideOverButton.addEventListener("click", () => {
   slideOverPanel.classList.add("hidden");
 });
 
+// Écouteur d'événement pour fermer le panneau latéral lorsque l'utilisateur clique en dehors de celui-ci
+const backgroundOverlay = document.getElementById("backgroundOverlay");
+backgroundOverlay.addEventListener("click", () => {
+  slideOverPanel.classList.add("hidden");
+});
 
-
-  return header;
+// Renvoyer l'en-tête
+return header;
 }
