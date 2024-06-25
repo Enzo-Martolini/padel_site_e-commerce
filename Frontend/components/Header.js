@@ -2,7 +2,8 @@
 export function createHoverModal(link, categories, brands) {
   // Create modal container
   const modalContainer = document.createElement("div");
-  modalContainer.className = "fixed flex items-center justify-center bg-opacity-50 hidden";
+  modalContainer.className =
+    "fixed flex items-center justify-center bg-opacity-50 hidden";
   modalContainer.style.zIndex = "1000";
 
   // Create modal content
@@ -25,8 +26,7 @@ export function createHoverModal(link, categories, brands) {
     const listItem = document.createElement("li");
     const linkItem = document.createElement("a");
     linkItem.href = `#${category.toLowerCase()}`;
-    linkItem.className = "text-blue-500 hover:underline";
-    linkItem.style.fontFamily = "Lobster Two";
+    linkItem.className = "text-black hover:underline";
     linkItem.textContent = category;
     listItem.appendChild(linkItem);
     categoriesList.appendChild(listItem);
@@ -46,8 +46,7 @@ export function createHoverModal(link, categories, brands) {
     const listItem = document.createElement("li");
     const linkItem = document.createElement("a");
     linkItem.href = `#${brand.toLowerCase()}`;
-    linkItem.className = "text-blue-500 hover:underline";
-    linkItem.style.fontFamily = "Lobster Two";
+    linkItem.className = "text-black hover:underline";
     linkItem.textContent = brand;
     listItem.appendChild(linkItem);
     brandsList.appendChild(listItem);
@@ -67,7 +66,7 @@ export function createHoverModal(link, categories, brands) {
 
   // Show modal on hover
   let isMouseOverModal = false;
-  
+
   link.addEventListener("mouseover", () => {
     modalContainer.classList.remove("hidden");
   });
@@ -83,7 +82,7 @@ export function createHoverModal(link, categories, brands) {
       if (!isMouseOverModal) {
         modalContainer.classList.add("hidden");
       }
-    }, 200); // Adjust the delay as needed to prevent accidental closure
+    }, 0); // Adjust the delay as needed to prevent accidental closure
   });
 
   modalContainer.addEventListener("mouseout", () => {
@@ -137,13 +136,45 @@ export function AfficherHeader() {
         createHoverModal(link, categories, brands);
       });
     }
+
+    if (text === "Chaussures") {
+      link.classList.add("hover-link"); // Ajoutez la classe hover-link uniquement au lien "Raquettes"
+      link.addEventListener("mouseover", () => {
+        const categories = ["Femmes", "Hommes", "Enfants"];
+        const brands = [
+          "Head",
+          "BullPadel",
+          "Babolat",
+          "Kuikma",
+          "Nox",
+          "Adidas",
+        ];
+        createHoverModal(link, categories, brands);
+      });
+    }
+
+    if (text === "Sacs") {
+      link.classList.add("hover-link"); // Ajoutez la classe hover-link uniquement au lien "Raquettes"
+      link.addEventListener("mouseover", () => {
+        const categories = ["Femmes", "Hommes"];
+        const brands = [
+          "Head",
+          "BullPadel",
+          "Babolat",
+          "Kuikma",
+          "Nox",
+          "Adidas",
+        ];
+        createHoverModal(link, categories, brands);
+      });
+    }
   });
 
   header.appendChild(navLinks);
 
   // Profile and Cart Icons
   const iconsContainer = document.createElement("div");
-  iconsContainer.className = "flex space-x-4";
+  iconsContainer.className = "flex space-x-4 relative"; // 'relative' added for dropdown positioning
 
   const profileLink = document.createElement("a");
   profileLink.href = "#";
@@ -152,18 +183,208 @@ export function AfficherHeader() {
   profileIcon.alt = "Profile";
   profileIcon.className = "h-9 border-r-2 p-1 border-black size-9";
   profileLink.appendChild(profileIcon);
+
+  // Create the dropdown menu
+  const dropdownMenu = document.createElement("div");
+  dropdownMenu.className =
+    "hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none";
+  dropdownMenu.setAttribute("role", "menu");
+  dropdownMenu.setAttribute("aria-orientation", "vertical");
+  dropdownMenu.setAttribute("aria-labelledby", "menu-button");
+  dropdownMenu.setAttribute("tabindex", "-1");
+
+  // Add the menu items
+  dropdownMenu.innerHTML = `
+  <div class="py-1" role="none">
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">Voir Profil</a>
+    <form method="POST" action="#" role="none">
+      <button type="submit" class="block w-full px-4 py-2 text-left text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Déconnexion</button>
+    </form>
+  </div>
+`;
+
+  // Append the dropdown menu to the profile link container
+  profileLink.appendChild(dropdownMenu);
   iconsContainer.appendChild(profileLink);
 
+  // Cart Icon
   const cartLink = document.createElement("a");
   cartLink.href = "#";
   const cartIcon = document.createElement("img");
-  cartIcon.src = "../assets/icon-shopping-cart.png";
+  cartIcon.src = "../assets/icons8-shopping-cart-90.png";
   cartIcon.alt = "Cart";
   cartIcon.className = "h-8 px-2";
   cartLink.appendChild(cartIcon);
   iconsContainer.appendChild(cartLink);
 
+  // Append iconsContainer to the header
   header.appendChild(iconsContainer);
 
-  return header;
+  // Add event listener to toggle the dropdown menu
+  profileLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    dropdownMenu.classList.toggle("hidden");
+  });
+
+  // Add a click listener to the document to close the dropdown when clicking outside
+  document.addEventListener("click", (event) => {
+    if (!profileLink.contains(event.target)) {
+      dropdownMenu.classList.add("hidden");
+    }
+  });
+
+// Créer le panneau latéral pour le panier
+const slideOverPanel = document.createElement("div");
+slideOverPanel.className = "hidden fixed inset-0 overflow-hidden z-50";
+slideOverPanel.innerHTML = `
+  <div class="absolute inset-0 overflow-hidden">
+    <div id="backgroundOverlay" class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
+      <div class="relative w-screen max-w-sm">
+        <div class="h-full flex flex-col py-6 bg-teal-50 shadow-xl overflow-y-scroll">
+          <div class="px-4 sm:px-6">
+            <div class="flex items-start justify-between">
+              <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Mon Panier</h2>
+              <div class="ml-3 h-7 flex items-center">
+                <button type="button" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="close-slide-over">
+                  <span class="sr-only">Close panel</span>
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 relative flex-1 px-4 sm:px-6">
+            <!-- Contenu du panier -->
+            <div class="absolute inset-0 px-4 sm:px-6 overflow-x-hidden" aria-hidden="true">
+              <ul role="list" class="divide-y divide-gray-200 border border-sky-900">
+                <!-- Articles du panier -->
+                <li class="py-6 flex">
+                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border-gray-200">
+                    <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
+                  </div>
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div class="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a href="#">Starter Pack BullPadel</a>
+                        </h3>
+                        <p class="ml-4">200€</p>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
+                    </div>
+                    <div class="flex flex-1 items-end justify-between text-sm">
+                      <p class="text-gray-500">Quantité: 1</p>
+                      <div class="flex">
+                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Supprimer</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- (Autres articles) -->
+                <li class="py-6 flex">
+                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border-gray-200">
+                    <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
+                  </div>
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div class="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a href="#">Starter Pack BullPadel</a>
+                        </h3>
+                        <p class="ml-4">200€</p>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
+                    </div>
+                    <div class="flex flex-1 items-end justify-between text-sm">
+                      <p class="text-gray-500">Quantité: 1</p>
+                      <div class="flex">
+                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Supprimer</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="py-6 flex">
+                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border-gray-200">
+                    <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
+                  </div>
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div class="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a href="#">Starter Pack BullPadel</a>
+                        </h3>
+                        <p class="ml-4">200€</p>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
+                    </div>
+                    <div class="flex flex-1 items-end justify-between text-sm">
+                      <p class="text-gray-500">Quantité: 1</p>
+                      <div class="flex">
+                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Supprimer</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="py-6 flex">
+                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border-gray-200">
+                    <img src="./assets/Test_pack_padel-removebg-preview.png" alt="Product Image" class="h-full w-full object-cover object-center">
+                  </div>
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div class="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a href="#">Starter Pack BullPadel</a>
+                        </h3>
+                        <p class="ml-4">200€</p>
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">Starter Pack padel BullPadel édition Bela</p>
+                    </div>
+                    <div class="flex flex-1 items-end justify-between text-sm">
+                      <p class="text-gray-500">Quantité: 1</p>
+                      <div class="flex">
+                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Supprimer</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Bouton sous les articles du panier -->
+          <div class="mt-6 flex justify-center px-4 sm:px-6">
+            <div class="border-2 border-sky-900 rounded-lg inline-flex items-center justify-center">
+              <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500 px-4 py-2">Poursuivre l'achat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+// Ajouter le panneau latéral au corps du document
+document.body.appendChild(slideOverPanel);
+
+// Écouteur d'événement pour afficher le panneau latéral lorsque l'icône du panier est cliquée
+cartLink.addEventListener("click", (event) => {
+  event.preventDefault();
+  slideOverPanel.classList.remove("hidden");
+});
+
+// Écouteur d'événement pour fermer le panneau latéral lorsque le bouton de fermeture est cliqué
+const closeSlideOverButton = document.getElementById("close-slide-over");
+closeSlideOverButton.addEventListener("click", () => {
+  slideOverPanel.classList.add("hidden");
+});
+
+// Écouteur d'événement pour fermer le panneau latéral lorsque l'utilisateur clique en dehors de celui-ci
+const backgroundOverlay = document.getElementById("backgroundOverlay");
+backgroundOverlay.addEventListener("click", () => {
+  slideOverPanel.classList.add("hidden");
+});
+
+// Renvoyer l'en-tête
+return header;
 }
