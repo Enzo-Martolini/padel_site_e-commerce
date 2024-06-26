@@ -8,6 +8,8 @@ var name_form = document.getElementById("name_form");
 var surname = document.getElementById("surname_form");
 console.log("fonction atteinte")
 
+
+
 document.addEventListener("click", function(event){
     var isValid = true;
 
