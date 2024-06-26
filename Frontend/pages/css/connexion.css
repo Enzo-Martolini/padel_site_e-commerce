@@ -49,3 +49,8 @@ body {
 #form-connexion button:active{
     box-shadow: 0px 0px 1px gray;
 }
+
+#login_form a {
+    display: block;
+    text-align: center;
+}
