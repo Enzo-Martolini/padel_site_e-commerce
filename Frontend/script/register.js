@@ -1,3 +1,7 @@
+document.getElementById('login').addEventListener("click", function(){
+    window.location.href="login.php"
+})
+
 var mail = document.getElementById("mail_form");
 var password = document.getElementById("password_form");
 var name_form = document.getElementById("name_form");
