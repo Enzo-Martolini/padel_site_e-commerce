@@ -40,3 +40,9 @@ sold()
 
 getUserPurchaseHistory()
     --> Cette fonction doit renvoyer un tableau dans lequel toutes les entrées présente dans la table history.
+
+
+
+
+
+    
