@@ -35,7 +35,9 @@ if (isset($_POST['mail']) && isset($_POST["password"])){
             <div id="button">
                 <button type="submit">Se connecter</button> 
             </div>
-            <a href="" id="register">Créer un compte</ahref>
+          
+            <a href="" id="register">Créer un compte</a>
+
         </form>
     </div>
     <script src="../script/connexion.js"></script>

@@ -1,5 +1,6 @@
 document.getElementById('login').addEventListener("click", function(){
-    window.location.href = "login.php";
+    window.location.href="login.php"
+
 })
 
 var mail = document.getElementById("mail_form");

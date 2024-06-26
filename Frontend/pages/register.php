@@ -42,7 +42,8 @@ include_once "../../backend/api.php";
             <div id="button">
                 <button type="submit">S'enregister'</button> 
             </div>
-            <a href="" id="login">Se connecter</ahref>
+            <a href="" id="login">Se connecter</a>
+
         </form>
     </div>
     <script src="../script/register.js"></script>
