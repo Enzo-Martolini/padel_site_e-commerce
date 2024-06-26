@@ -40,9 +40,10 @@ include_once "../../backend/api.php";
             <p id="error_password" style="color:red; font-size: 1rem"></p>
 
             <div id="button">
-                <button type="submit">Se connecter</button> 
+                <button type="submit">S'enregister'</button> 
             </div>
             <a href="" id="login">Se connecter</a>
+
         </form>
     </div>
     <script src="../script/register.js"></script>
