@@ -27,7 +27,7 @@ $data = getProduct()?>
     <?php foreach ($data as $value){
         echo <<<HTML
             <div class="product">
-                <p>{$value['id']}</p>
+                <p class="id">{$value['id']}</p>
                 <p>{$value['name']}</p>
                 <p>{$value['price']}</p>
                 <p>{$value['description']}</p>

@@ -66,8 +66,9 @@ button {
 
 }
 
-.modify-btn-pen, .modify-btn-cross {
+.modify-btn-pen, .modify-btn-cross, .modify-btn-valide {
     border-radius: 100rem;
+
     box-shadow: black 0px 0px 10px;
 }
 .modify-btn-pen, .modify-btn-cross {
