@@ -21,6 +21,8 @@ $data = getProduct()?>
         <h4>Nom</h4>
         <h4>Prix</h4>
         <h4>Description</h4>
+        <h4>Type</h4>
+        <h4>Sexe et marque</h4>
     </div>
     <?php foreach ($data as $value){
         echo <<<HTML
@@ -29,17 +31,14 @@ $data = getProduct()?>
                 <p>{$value['name']}</p>
                 <p>{$value['price']}</p>
                 <p>{$value['description']}</p>
+                <p>{$value['category']}</p>
+                <p>{$value['subcategory']}</p>
                 <div class="product-modification">
+                            <img src="../assets/icon_pen.png" width=30px height=30px class=modify-btn>
                     <form action="" method="post">
-                        <input type="hidden" name="modify" value="{$value['id']}">
+                        <input type="hidden" name="delete" value="{$value['id']}" >
                         <button type="submit">
-                            <img src="../assets/icon_pen.png" width=30px height=30px>
-                        </button>
-                    </form>
-                    <form action="" method="post">
-                        <input type="hidden" name="delete" value="{$value['id']}">
-                        <button type="submit">
-                            <img src="../assets/icon_cross.png" width=30px height=30px>
+                            <img src="../assets/icon_cross.png" width=30px height=30px class=modify-btn>
                         </button>
                     </form>
                 </div>
@@ -51,8 +50,8 @@ $data = getProduct()?>
         <input type="text" name="name" placeholder="Nom du produit">
         <input type="text" name="description" placeholder="Description du produit">
         <input type="number" name="price" placeholder="Prix unitaire du produit">
-        <input type="text" name="type" placeholder="Ex:Raquette"> <!--A modifier -->
-        <input type="text" name="gender" placeholder="man/woman/kid"> <!--A modifier -->
+        <input type="text" name="type" placeholder="Type de produit"> <!--A modifier -->
+        <input type="text" name="gender" placeholder="Genre"> <!--A modifier -->
         <input type="text" name="brand" placeholder="Marque"> <!--A modifier -->
         <input type="text" name="img" placeholder="Nom de l'image"> <!--A modifier -->
         <button type="submit" id="add-btn">Envoyer</button>
