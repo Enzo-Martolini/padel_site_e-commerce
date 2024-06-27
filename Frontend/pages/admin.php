@@ -34,11 +34,11 @@ $data = getProduct()?>
                 <p>{$value['category']}</p>
                 <p>{$value['subcategory']}</p>
                 <div class="product-modification">
-                            <img src="../assets/icon_pen.png" width=30px height=30px class=modify-btn>
+                            <img src="../assets/icon_pen.png" width=30px height=30px class=modify-btn-pen>
                     <form action="" method="post">
                         <input type="hidden" name="delete" value="{$value['id']}" >
                         <button type="submit">
-                            <img src="../assets/icon_cross.png" width=30px height=30px class=modify-btn>
+                            <img src="../assets/icon_cross.png" width=30px height=30px class=modify-btn-cross>
                         </button>
                     </form>
                 </div>
@@ -71,5 +71,6 @@ $data = getProduct()?>
             exit;
         }
     ?>
+<script src="../script/admin.js"></script>
 </body>
 </html>
