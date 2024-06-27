@@ -1,10 +1,13 @@
-let arrayInput = [
-    name => "",
-    description => "",
-    price => "",
-    category => "",
-    subcategory => "",
-]
+let arrayInput = {
+    name: "",
+    price: "",
+    description: "",
+    category: "",
+    subcategory: "",
+};
+
+btn_modify = document.querySelector('.product-modification')
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
 
@@ -24,15 +27,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function modify(event) {
     const btn = event.target;
     const productDiv = btn.closest('.product');
-    const pTags = productDiv.querySelectorAll('p');
+    const pTags = productDiv.querySelectorAll('p.modifiable');
     pTags.forEach((pTag) => {
         if (!pTag.classList.contains("id")) {
             const input = document.createElement('input');
             input.type = 'text';
             input.className = 'modify-input'
             input.value = pTag.innerText;
-            pTag.innerText = '';
-            pTag.appendChild(input);
+            pTag.remove();
+            productDiv.insertBefore(input, btn_modify);
         }
     });
     
@@ -66,7 +69,17 @@ function validate(event) {
             default:
                 console.log("Valeur non prise en charge");
         }
+        inputModified.remove();
+
     });
+    // Parcourez chaque clé dans arrayInput
+    for (let key in arrayInput) {
+        p = document.createElement('p')
+        p.className = 'modifiable'
+        p.innerText=arrayInput[key]
+        console.log(arrayInput[key])
+        productDiv.insertBefore(p, btn_modify);
+    }
     btn.src="../assets/icon_pen.png"
     btn.className='modify-btn-pen'
 }

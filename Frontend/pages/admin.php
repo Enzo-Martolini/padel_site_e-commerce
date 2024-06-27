@@ -27,14 +27,14 @@ $data = getProduct()?>
     <?php foreach ($data as $value){
         echo <<<HTML
             <div class="product">
-                <p class="id">{$value['id']}</p>
-                <p>{$value['name']}</p>
-                <p>{$value['price']}</p>
-                <p>{$value['description']}</p>
-                <p>{$value['category']}</p>
-                <p>{$value['subcategory']}</p>
+                <p class="id">{$value['id']}</p>   
+                <p class="modifiable">{$value['name']}</p>
+                <p class="modifiable">{$value['price']}</p>
+                <p class="modifiable">{$value['description']}</p>
+                <p class="modifiable">{$value['category']}</p>
+                <p class="modifiable">{$value['subcategory']}</p>
                 <div class="product-modification">
-                            <img src="../assets/icon_pen.png" width=30px height=30px class=modify-btn-pen>
+                     <img src="../assets/icon_pen.png" width=30px height=30px class=modify-btn-pen>
                     <form action="" method="post">
                         <input type="hidden" name="delete" value="{$value['id']}" >
                         <button type="submit">
