@@ -15,7 +15,7 @@ include_once "../../backend/api.php";
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-    <title>Document</title>
+    <title>Enregistrement</title>
 </head>
 <body>
     <div id="form-connexion">
@@ -40,8 +40,10 @@ include_once "../../backend/api.php";
             <p id="error_password" style="color:red; font-size: 1rem"></p>
 
             <div id="button">
-                <button type="submit">Se connecter</button> 
+                <button type="submit">S'enregister'</button> 
             </div>
+            <a href="" id="login">Se connecter</a>
+
         </form>
     </div>
     <script src="../script/register.js"></script>

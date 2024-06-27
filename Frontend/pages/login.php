@@ -18,7 +18,7 @@ if (isset($_POST['mail']) && isset($_POST["password"])){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-    <title>Document</title>
+    <title>Page de connexion</title>
 </head>
 <body>
     <div id="form-connexion">
@@ -35,6 +35,9 @@ if (isset($_POST['mail']) && isset($_POST["password"])){
             <div id="button">
                 <button type="submit">Se connecter</button> 
             </div>
+          
+            <a href="" id="register">Créer un compte</a>
+
         </form>
     </div>
     <script src="../script/connexion.js"></script>
