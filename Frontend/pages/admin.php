@@ -1,5 +1,8 @@
-<?php include "../../backend/api.php";
-$data = getProduct()?>
+<?php 
+include "../../backend/api.php";
+include "../../backend/classes/product.php";
+$product = new Product($pdo);
+$data = $product->getAllProduct()?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,18 +61,28 @@ $data = getProduct()?>
     </form>
     <?php 
 
-        if (isset($_POST['name'], $_POST['price'], $_POST['description'], $_POST['type'], $_POST['gender'], $_POST['brand'], $_POST['img'])) {
-            addProduct($_POST['name'], $_POST['price'], $_POST['description'], $_POST['type'], $_POST['gender'], $_POST['brand'], $_POST['img']);
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit;
-        }
+    if (isset($_POST['name'], $_POST['price'], $_POST['description'], $_POST['type'], $_POST['gender'], $_POST['brand'], $_POST['img'])) {
+        $name = $_POST['name'];
+        $price = $_POST['price'];
+        $description = $_POST['description'];
+        $type = $_POST['type'];
+        $gender = $_POST['gender'];
+        $brand = $_POST['brand'];
+        $img = $_POST['img'];
 
-        if (isset($_POST['delete'])){
-            $id_delete = $_POST['delete'];
-            deleteProduct($id_delete);
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit;
-        }
+        $product->addProduct($name, $price, $description, $type, $gender, $brand, $img);
+        
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    }
+    
+    if (isset($_POST['delete'])){
+        $id_delete = $_POST['delete'];
+        $product->deleteProduct($id_delete);
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    }
+    
     ?>
 <script src="../script/admin.js"></script>
 </body>

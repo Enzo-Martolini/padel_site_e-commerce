@@ -1,7 +1,13 @@
 <?php 
-include_once "../../backend/api.php";
+include_once "../../backend/classes/user.php";
+$user = new User($pdo);
+
 if (isset($_POST['mail']) && isset($_POST["password"])){
-    $error = connexion($_POST['mail'], $_POST['password']);
+
+    $mail = $_POST['mail'];
+    $password = $_POST['password'];
+
+    $error = $user->loginUser($mail, $password);
 };
 ?>
 

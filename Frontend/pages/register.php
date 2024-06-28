@@ -1,5 +1,5 @@
 <?php 
-include_once "../../backend/api.php";
+include_once "../../backend/classes/user.php";
 ?>
 
 <!DOCTYPE html>
@@ -53,4 +53,13 @@ include_once "../../backend/api.php";
 <?php 
 
 if (isset($_POST['name'],$_POST['surname'], $_POST['mail'], $_POST['password'])){
-addUser($_POST['name'],$_POST['surname'], $_POST['mail'], $_POST['password']);}
+
+    $name = $_POST['name'];
+    $surname = $_POST['surname'];
+    $mail = $_POST['mail'];
+    $password = $_POST['password'];
+    
+    $user = new User($pdo);
+    $user->addUser($name, $surname, $mail, $password);
+
+}
