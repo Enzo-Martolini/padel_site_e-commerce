@@ -98,9 +98,9 @@ export function AfficherHeader() {
 
   // Logo
   const logoLink = document.createElement("a");
-  logoLink.href = "#";
+  logoLink.href = "./index.html";
   const logo = document.createElement("img");
-  logo.src = "../assets/logo-png-removebg-preview.png";
+  logo.src = "./assets/logo-png-removebg-preview.png";
   logo.alt = "Logo";
   logo.className = "h-12";
   logoLink.appendChild(logo);
@@ -113,8 +113,9 @@ export function AfficherHeader() {
   const links = ["Raquettes", "Chaussures", "Sacs", "Balles"];
   links.forEach((text) => {
     const link = document.createElement("a");
-    link.href = "#";
+    link.href = "./products.html";
     link.textContent = text;
+    link.id="productBalls"
     link.className = "text-xl px-8 font-bold hover-link"; // Add hover-link class
     link.style.fontFamily = "Lobster Two";
     link.style.color = "#01555C";
@@ -179,7 +180,7 @@ export function AfficherHeader() {
   const profileLink = document.createElement("a");
   profileLink.href = "#";
   const profileIcon = document.createElement("img");
-  profileIcon.src = "../assets/icons8-user-96.png";
+  profileIcon.src = "./assets/icons8-user-96.png";
   profileIcon.alt = "Profile";
   profileIcon.className = "h-9 border-r-2 p-1 border-black size-9";
   profileLink.appendChild(profileIcon);
@@ -211,7 +212,7 @@ export function AfficherHeader() {
   const cartLink = document.createElement("a");
   cartLink.href = "#";
   const cartIcon = document.createElement("img");
-  cartIcon.src = "../assets/icons8-shopping-cart-90.png";
+  cartIcon.src = "./assets/icons8-shopping-cart-90.png";
   cartIcon.alt = "Cart";
   cartIcon.className = "h-8 px-2";
   cartLink.appendChild(cartIcon);
