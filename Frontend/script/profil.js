@@ -2,10 +2,19 @@ actual_password = document.getElementById('actual_password')
 new_password = document.getElementById('new_password')
 verify_new_password = document.getElementById('verify_new_password')
 
-document.addEventListener("input", function(){
-    if (new_password.value !== "" && verify_new_password.value !== "" && new_password.value !== verify_new_password.value){
-        new_password.style.borderColor = "red";    
-        verify_new_password.style.borderColor = "red";    
+new_password.addEventListener("input", function(){
+    if (new_password.value===""){
+        new_password.style.borderColor='red';
+    } else {
+        new_password.style.borderColor='green';
+    }
+})
+
+verify_new_password.addEventListener("input", function(){
+    if (verify_new_password.value==="" || verify_new_password.value!==new_password.value ){
+        verify_new_password.style.borderColor='red';
+    } else {
+        verify_new_password.style.borderColor='green';
     }
 })
 

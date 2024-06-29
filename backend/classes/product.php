@@ -46,4 +46,22 @@ class product {
             echo "Erreur : " . $e->getMessage();
         }
     }
+    public function updateProduct($id_product, $name, $price, $description, $category, $subcategory){
+        try {
+
+            $category = json_encode($category);
+            $subcategory = json_encode($subcategory);
+            $ins = $this->pdo->prepare("UPDATE `product` SET `name`=:name,`description`=:description,`price`=:price,`category`=:category,`subcategory`=:subcategory WHERE id= :id_product");
+            $ins->execute(array(
+                ':id_product'=>$id_product,
+                ':name'=>$name,
+                ':price'=>$price,
+                ':description'=>$description,
+                ':category'=>$category,
+                ':subcategory'=>$subcategory,
+            ));
+            } catch (PDOException $e){
+                echo "Erreur : " . $e->getMessage();
+            }
+    }
 }

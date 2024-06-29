@@ -42,6 +42,7 @@ class User {
                 $_SESSION['name'] = $log[0]['name'];
                 $_SESSION['surname'] = $log[0]['surname'];
                 $_SESSION['mail'] = $log[0]['mail'];
+                $_SESSION['role'] = $log[0]['role'];
                 header("Location: profil.php");
             } else {
                 return true;

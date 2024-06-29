@@ -106,6 +106,19 @@ if (!isset($_SESSION['id'])){
             </div>
             HTML;
         }
+
+        if (isset($_POST['actual_password'], $_POST['new_password'], $_POST['verify_new_password']) && $_POST['new_password']===$_POST['verify_new_password']){
+
+            $id = $_SESSION['id'];
+            $actualPassword = $_POST['actual_password'];
+            $newPassword = $_POST['new_password'];
+            $verifyNewPassword = $_POST['actual_password'];
+
+            $user->updatePassword($id,$actualPassword, $newPassword);
+        } else if (isset($_POST['actual_password'], $_POST['new_password'], $_POST['verify_new_password'])) {
+            echo "<p style='color:red'>Il y a eu un problème avec le changement de mot de passe</p>";
+        }
+
     ?>
     
     <script src="../script/profil.js"></script>
