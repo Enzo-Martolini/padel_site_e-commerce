@@ -3,7 +3,7 @@ let arrayInput = {
     price: "",
     description: "",
     category: "",
-    subcategory: "",
+    subcategory: [],
 };
 
 btn_modify = document.querySelector('.product-modification')
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 modify(event);
             } else if (btn.classList.contains('modify-btn-valide')) {
                 validate(event);
+                updateProduct(event);
             }
         });
     });
@@ -61,10 +62,13 @@ function validate(event) {
                 arrayInput['description'] = inputModified.value;
                 break;
             case 4:
-                arrayInput['category'] = inputModified.value;
+                arrayInput['category'] = inputModified.value
                 break;
-            case 5:
-                arrayInput['subcategory'] = inputModified.value;
+            case 5 :
+                arrayInput['subcategory'][0] = inputModified.value
+                break;
+            case 6 :
+                arrayInput['subcategory'][1] = inputModified.value
                 break;
             default:
                 console.log("Valeur non prise en charge");
@@ -74,12 +78,51 @@ function validate(event) {
     });
     // Parcourez chaque clé dans arrayInput
     for (let key in arrayInput) {
-        p = document.createElement('p')
-        p.className = 'modifiable'
-        p.innerText=arrayInput[key]
-        console.log(arrayInput[key])
-        productDiv.insertBefore(p, btn_modify);
+        if (key !== 'subcategory') {
+            p = document.createElement('p')
+            p.className = 'modifiable'
+            p.innerText=arrayInput[key]
+            console.log(arrayInput[key])
+            productDiv.insertBefore(p, btn_modify);
+        } else {
+            arrayInput[key].forEach(element => {
+                p = document.createElement('p')
+                p.className = 'modifiable'
+                p.innerText=element
+                console.log(element)
+                productDiv.insertBefore(p, btn_modify);
+            });
+        }
     }
     btn.src="../assets/icon_pen.png"
     btn.className='modify-btn-pen'
+
+    console.log('le subcategory ' + arrayInput['subcategory'][0])
+
+}
+
+function updateProduct(event){
+    const btn = event.target;
+    const productDiv = btn.closest('.product');
+    id = productDiv.querySelector(".id").innerText;
+    var data = {
+    id_product: id,
+    name: arrayInput['name'],
+    price: arrayInput['price'],
+    description: arrayInput['description'],
+    category: arrayInput['category'],
+    subcategory: arrayInput['subcategory'],
+};
+
+fetch('http://localhost:8000/backend/api.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch((error) => console.error('Error:', error));
+
 }

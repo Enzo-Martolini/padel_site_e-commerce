@@ -46,6 +46,6 @@ if (isset($_POST['mail']) && isset($_POST["password"])){
 
         </form>
     </div>
-    <script src="../script/connexion.js"></script>
+    <script src="../script/login.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ body {
 
 #product-header h4 {
     width: 10%;
-    margin: 3%;}
+    margin: 2%;}
 
 p {
     font-family: "Kulim park", sans-serif;
@@ -33,6 +33,7 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 0px 10px;
 }
 .product-modification img {
     margin: 10% 0%;
@@ -66,9 +67,8 @@ button {
 
 }
 
-.modify-btn-pen, .modify-btn-cross, .modify-btn-valide {
+.modify-btn-pen, .modify-btn-cross {
     border-radius: 100rem;
-
     box-shadow: black 0px 0px 10px;
 }
 .modify-btn-pen, .modify-btn-cross {

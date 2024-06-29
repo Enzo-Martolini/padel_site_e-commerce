@@ -1,5 +1,8 @@
 <?php
-include_once "../../backend/api.php";
+    include_once "../../backend/classes/user.php";
+    include_once "../../backend/classes/order.php";
+    include_once "../../backend/classes/product.php";
+
 session_start();
 
 if (!isset($_SESSION['id'])){
@@ -37,6 +40,11 @@ if (!isset($_SESSION['id'])){
         <p><?= $_SESSION['name'] ?></p>
         <p><?= $_SESSION['surname'] ?></p>
         <p><?= $_SESSION['mail'] ?></p>
+        <?php if ($_SESSION['role']==='admin') {
+            echo("<p> Vous etes sur un compte administrateur </p>");
+            }
+        ?>
+        
     </div>
     <div id="password_modification">
         <h4>Modifier mon mot de passe</h4>
@@ -57,33 +65,62 @@ if (!isset($_SESSION['id'])){
             <button type="submit" id="button">Changer le mot de passe</button>
         </form>
     </div>
-    <div id="historical">
-        <div>
-            <div class="historic">
-                <h4>Numero de commande : 125</h4>
-            </div>
-            <div class="command">
-                <p>Produit : Raquette de Padel Bullpadel</p>
-                <p>Quantité : 1</p>
-                <p>Prix : 120€</p>
-            </div>
-            <div class="command">
-                <p>Produit : Balle de Padel Dunlop</p>
-                <p>Quantité : 3</p>
-                <p>Prix : 5€</p>
-            </div>
+    <?php
+        $order = new Order($pdo);
+        $product = new Product($pdo);
 
-            <div class="historic">
-                <h4>Numero de commande : 126</h4>
+        $user = new User($pdo);
+        $data = $user->getCommand($_SESSION['id']);
+    
+        if (isset($data) && $data !== true) {
+            foreach ($data as $value) {
+                $prix=0;
+                echo <<<HTML
+                <div id="historical">
+                <div>
+                    <div class="historic">
+                        <h4>Numero de commande : {$value['id']}</h4>
+                    </div>
+                HTML;
+                $commands = $order->getOrder($value['id']);
+                foreach ($commands as $command) {
+                    echo <<<HTML
+                            <div class="command">
+                                <p>Produit : {$command['id_name']}</p>
+                                <p>Quantité : {$command['quantity']}</p>
+                                <p>Prix : {$command['price']}€</p>
+                            </div>
+                    HTML;
+                    $prix += $command['price']*$command['quantity'];
+                }
+                echo <<<HTML
+                            <h4>Prix total : {$prix} €</h4>
+                        </div>
+                    </div>
+                HTML;
+            }
+        } else if (isset($data) && $data === true) {
+            echo <<<HTML
+            <div>
+                <p>Aucunes commandes passées</p>
             </div>
-            <div class="command">
-                <p>Produit : Sac de Padel Adidas</p>
-                <p>Quantité : 1</p>
-                <p>Prix : 60€</p>
-            </div>
+            HTML;
+        }
 
-        </div>
-    </div>
+        if (isset($_POST['actual_password'], $_POST['new_password'], $_POST['verify_new_password']) && $_POST['new_password']===$_POST['verify_new_password']){
+
+            $id = $_SESSION['id'];
+            $actualPassword = $_POST['actual_password'];
+            $newPassword = $_POST['new_password'];
+            $verifyNewPassword = $_POST['actual_password'];
+
+            $user->updatePassword($id,$actualPassword, $newPassword);
+        } else if (isset($_POST['actual_password'], $_POST['new_password'], $_POST['verify_new_password'])) {
+            echo "<p style='color:red'>Il y a eu un problème avec le changement de mot de passe</p>";
+        }
+
+    ?>
+    
     <script src="../script/profil.js"></script>
 </body>
 

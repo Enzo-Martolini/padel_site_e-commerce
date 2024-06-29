@@ -1,5 +1,11 @@
-<?php 
-include "../../backend/api.php";
+<?php
+session_start();
+
+if (!isset($_SESSION['id']) || $_SESSION['role']!=='admin'){
+    header('Location: error.php');
+    exit();
+}
+
 include "../../backend/classes/product.php";
 $product = new Product($pdo);
 $data = $product->getAllProduct()?>
@@ -25,17 +31,22 @@ $data = $product->getAllProduct()?>
         <h4>Prix</h4>
         <h4>Description</h4>
         <h4>Type</h4>
-        <h4>Sexe et marque</h4>
+        <h4>Genre</h4>
+        <h4>Marque</h4>
     </div>
     <?php foreach ($data as $value){
+        $category = json_decode($value['category']);
+        $subcategory = json_decode($value['subcategory']);
+        $subcategory_one = isset($subcategory[1]) ? $subcategory[1] : '';
         echo <<<HTML
             <div class="product">
                 <p class="id">{$value['id']}</p>   
                 <p class="modifiable">{$value['name']}</p>
                 <p class="modifiable">{$value['price']}</p>
                 <p class="modifiable">{$value['description']}</p>
-                <p class="modifiable">{$value['category']}</p>
-                <p class="modifiable">{$value['subcategory']}</p>
+                <p class="modifiable">{$category}</p>
+                <p class="modifiable">{$subcategory[0]}</p>
+                <p class="modifiable">{$subcategory_one}</p>
                 <div class="product-modification">
                      <img src="../assets/icon_pen.png" width=30px height=30px class=modify-btn-pen>
                     <form action="" method="post">
