@@ -21,7 +21,7 @@ function validateForm(event) {
     }
 
     // Vérifiez si le mot de passe a plus de 6 caractères
-    if (password.value !== "" && password.value.length <= 6){
+    if (password.value !== "" && password.value.length < 6){
         password.style.borderColor = "red";
         document.getElementById("error_password").textContent = "Le mot de passe doit faire plus de 6 caractères";
         isValid = false;

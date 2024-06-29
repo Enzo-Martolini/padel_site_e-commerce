@@ -28,6 +28,4 @@
 
 $user->updatePassword('2', 'Unmotdepasse', 'unmotdepasse');
 
-echo "<pre>";
-var_dump($product->getAllProduct());
-echo "</pre>";
+$product->updateProduct('5', 'Raquette de padel adulte-Kuikma PR 190 vert', 40, 'Conçu pour les joueurs de padel débutants qui recherchent une raquette légère avec un grand sweet spot, ce qui leur permet d\'avoir le plus grand confort.', ["racket"], ["man", "kuikma"], 'backend/images/racket/racket_3.png');
