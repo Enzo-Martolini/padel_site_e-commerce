@@ -1,5 +1,14 @@
-<?php include "../../backend/api.php";
-$data = getProduct()?>
+<?php
+session_start();
+
+if (!isset($_SESSION['id']) || $_SESSION['role']!=='admin'){
+    header('Location: error.php');
+    exit();
+}
+
+include "../../backend/classes/product.php";
+$product = new Product($pdo);
+$data = $product->getAllProduct()?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,25 +30,29 @@ $data = getProduct()?>
         <h4>Nom</h4>
         <h4>Prix</h4>
         <h4>Description</h4>
+        <h4>Type</h4>
+        <h4>Genre</h4>
+        <h4>Marque</h4>
     </div>
     <?php foreach ($data as $value){
+        $category = json_decode($value['category']);
+        $subcategory = json_decode($value['subcategory']);
+        $subcategory_one = isset($subcategory[1]) ? $subcategory[1] : '';
         echo <<<HTML
             <div class="product">
-                <p>{$value['id']}</p>
-                <p>{$value['name']}</p>
-                <p>{$value['price']}</p>
-                <p>{$value['description']}</p>
+                <p class="id">{$value['id']}</p>   
+                <p class="modifiable">{$value['name']}</p>
+                <p class="modifiable">{$value['price']}</p>
+                <p class="modifiable">{$value['description']}</p>
+                <p class="modifiable">{$category}</p>
+                <p class="modifiable">{$subcategory[0]}</p>
+                <p class="modifiable">{$subcategory_one}</p>
                 <div class="product-modification">
+                     <img src="../assets/icon_pen.png" width=30px height=30px class=modify-btn-pen>
                     <form action="" method="post">
-                        <input type="hidden" name="modify" value="{$value['id']}">
+                        <input type="hidden" name="delete" value="{$value['id']}" >
                         <button type="submit">
-                            <img src="../assets/icon_pen.png" width=30px height=30px>
-                        </button>
-                    </form>
-                    <form action="" method="post">
-                        <input type="hidden" name="delete" value="{$value['id']}">
-                        <button type="submit">
-                            <img src="../assets/icon_cross.png" width=30px height=30px>
+                            <img src="../assets/icon_cross.png" width=30px height=30px class=modify-btn-cross>
                         </button>
                     </form>
                 </div>
@@ -51,26 +64,37 @@ $data = getProduct()?>
         <input type="text" name="name" placeholder="Nom du produit">
         <input type="text" name="description" placeholder="Description du produit">
         <input type="number" name="price" placeholder="Prix unitaire du produit">
-        <input type="text" name="type" placeholder="Ex:Raquette"> <!--A modifier -->
-        <input type="text" name="gender" placeholder="man/woman/kid"> <!--A modifier -->
+        <input type="text" name="type" placeholder="Type de produit"> <!--A modifier -->
+        <input type="text" name="gender" placeholder="Genre"> <!--A modifier -->
         <input type="text" name="brand" placeholder="Marque"> <!--A modifier -->
         <input type="text" name="img" placeholder="Nom de l'image"> <!--A modifier -->
         <button type="submit" id="add-btn">Envoyer</button>
     </form>
     <?php 
 
-        if (isset($_POST['name'], $_POST['price'], $_POST['description'], $_POST['type'], $_POST['gender'], $_POST['brand'], $_POST['img'])) {
-            addProduct($_POST['name'], $_POST['price'], $_POST['description'], $_POST['type'], $_POST['gender'], $_POST['brand'], $_POST['img']);
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit;
-        }
+    if (isset($_POST['name'], $_POST['price'], $_POST['description'], $_POST['type'], $_POST['gender'], $_POST['brand'], $_POST['img'])) {
+        $name = $_POST['name'];
+        $price = $_POST['price'];
+        $description = $_POST['description'];
+        $type = $_POST['type'];
+        $gender = $_POST['gender'];
+        $brand = $_POST['brand'];
+        $img = $_POST['img'];
 
-        if (isset($_POST['delete'])){
-            $id_delete = $_POST['delete'];
-            deleteProduct($id_delete);
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit;
-        }
+        $product->addProduct($name, $price, $description, $type, $gender, $brand, $img);
+        
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    }
+    
+    if (isset($_POST['delete'])){
+        $id_delete = $_POST['delete'];
+        $product->deleteProduct($id_delete);
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    }
+    
     ?>
+<script src="../script/admin.js"></script>
 </body>
 </html>
