@@ -1,14 +1,15 @@
 <?php
+require_once(__DIR__ . '/../Bdd.php');
 
-require_once __DIR__ . '/../database.php';
-
-class product {
-    private $pdo;
+class Product extends Bdd {
+    public $pdo;
     
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+    public function __construct() {
+        parent::__construct();
+       // This line is actually redundant, you can remove it
     }
-    public function getAllProduct (){
+
+    public function getAllProduct(){
         try {
         $ins = $this->pdo->prepare("SELECT * FROM product");
         $ins->setFetchMode(PDO::FETCH_ASSOC);
@@ -20,6 +21,8 @@ class product {
             echo "Erreur : " . $e->getMessage();
         }
     }
+    
+    
     public function addProduct($name, $price, $description, $type, $gender, $brand, $img_src){
         $category = json_encode([$type]);
         $subcategory = json_encode([$gender, $brand]);
@@ -65,3 +68,7 @@ class product {
             }
     }
 }
+
+
+
+?>

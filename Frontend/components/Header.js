@@ -98,7 +98,7 @@ export function AfficherHeader() {
 
   // Logo
   const logoLink = document.createElement("a");
-  logoLink.href = "./index.html";
+  logoLink.href = "./index.php";
   const logo = document.createElement("img");
   logo.src = "./assets/logo-png-removebg-preview.png";
   logo.alt = "Logo";
@@ -113,9 +113,9 @@ export function AfficherHeader() {
   const links = ["Raquettes", "Chaussures", "Sacs", "Balles"];
   links.forEach((text) => {
     const link = document.createElement("a");
-    link.href = "./products.html";
+    link.href = "./products.php";
     link.textContent = text;
-    link.id="productBalls"
+    link.id = "productBalls";
     link.className = "text-xl px-8 font-bold hover-link"; // Add hover-link class
     link.style.fontFamily = "Lobster Two";
     link.style.color = "#01555C";
@@ -234,10 +234,10 @@ export function AfficherHeader() {
     }
   });
 
-// Créer le panneau latéral pour le panier
-const slideOverPanel = document.createElement("div");
-slideOverPanel.className = "hidden fixed inset-0 overflow-hidden z-50";
-slideOverPanel.innerHTML = `
+  // Créer le panneau latéral pour le panier
+  const slideOverPanel = document.createElement("div");
+  slideOverPanel.className = "hidden fixed inset-0 overflow-hidden z-50";
+  slideOverPanel.innerHTML = `
   <div class="absolute inset-0 overflow-hidden">
     <div id="backgroundOverlay" class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
@@ -365,28 +365,27 @@ slideOverPanel.innerHTML = `
   </div>
 `;
 
-// Ajouter le panneau latéral au corps du document
-document.body.appendChild(slideOverPanel);
+  // Ajouter le panneau latéral au corps du document
+  document.body.appendChild(slideOverPanel);
 
-// Écouteur d'événement pour afficher le panneau latéral lorsque l'icône du panier est cliquée
-cartLink.addEventListener("click", (event) => {
-  event.preventDefault();
-  slideOverPanel.classList.remove("hidden");
-});
+  // Écouteur d'événement pour afficher le panneau latéral lorsque l'icône du panier est cliquée
+  cartLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    slideOverPanel.classList.remove("hidden");
+  });
 
-// Écouteur d'événement pour fermer le panneau latéral lorsque le bouton de fermeture est cliqué
-const closeSlideOverButton = document.getElementById("close-slide-over");
-closeSlideOverButton.addEventListener("click", () => {
-  slideOverPanel.classList.add("hidden");
-});
+  // Écouteur d'événement pour fermer le panneau latéral lorsque le bouton de fermeture est cliqué
+  const closeSlideOverButton = document.getElementById("close-slide-over");
+  closeSlideOverButton.addEventListener("click", () => {
+    slideOverPanel.classList.add("hidden");
+  });
 
-// Écouteur d'événement pour fermer le panneau latéral lorsque l'utilisateur clique en dehors de celui-ci
-const backgroundOverlay = document.getElementById("backgroundOverlay");
-backgroundOverlay.addEventListener("click", () => {
-  slideOverPanel.classList.add("hidden");
-});
+  // Écouteur d'événement pour fermer le panneau latéral lorsque l'utilisateur clique en dehors de celui-ci
+  const backgroundOverlay = document.getElementById("backgroundOverlay");
+  backgroundOverlay.addEventListener("click", () => {
+    slideOverPanel.classList.add("hidden");
+  });
 
-
-// Renvoyer l'en-tête
-return header;
+  // Renvoyer l'en-tête
+  return header;
 }

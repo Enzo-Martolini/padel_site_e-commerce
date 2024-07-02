@@ -13,6 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap"
         rel="stylesheet"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#edf6f9] min-h-screen flex flex-col">
     <!-- Header -->
@@ -26,9 +27,16 @@
         });
     </script>
 
-    <!-- Main Content -->
-    <div id="root" class="flex-grow h-full" style="height: 500px;">
-
+     <!-- Main Content -->
+     <div id="root" class="flex-grow h-full" style="height: 500px;">
+        <div id="productsBalls">
+            <a href="#">Fetch Products</a>
+  
+        </div>
+        <div id="products-container">
+ 
+            <!-- Les produits seront affichés ici -->
+        </div>
     </div>
 
 
