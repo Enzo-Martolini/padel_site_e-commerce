@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap"
         rel="stylesheet"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#edf6f9] min-h-screen flex flex-col">
     <!-- Header -->
@@ -25,24 +27,21 @@
         });
     </script>
 
-    <!-- Main Content -->
-    <div id="root" class="flex-grow">
-
-        <div class="bg-white">
-            <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-              <h2 class="text-2xl font-bold tracking-tight text-gray-900">Nos produits</h2>
-              <div id="products-container" class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <!-- Les produits seront affichés ici -->
-              </div>
-            </div>
-          </div>
-
-
+     <!-- Main Content -->
+     <div id="root" class="flex-grow h-full" style="height: 500px;">
+        <div id="productsBalls">
+            <a href="#">Fetch Products</a>
+  
+        </div>
+        <div id="products-container">
+ 
+            <!-- Les produits seront affichés ici -->
+        </div>
     </div>
 
 
-    <!-- Footer -->
-    <footer class="py-8 bg-[#83c5be]">
+     <!-- Footer -->
+     <footer style="background-color:#83C5BE;" class="py-8">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Left Column -->
             <div class="flex flex-col items-center">
