@@ -1,0 +1,20 @@
+.cardsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 100px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.name {
+    height: 100px;
+}
+
+.product {
+    width: 200px;
+}
