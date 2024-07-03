@@ -1,19 +1,3 @@
-async function fetchProducts() {
-    try {
-        // Remplacez l'URL par le chemin vers votre script PHP
-        const response = await fetch('/backend/routes/get_product.php');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        // Convertir la réponse en JSON
-        const data = await response.json();
-        return data;
-
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
-}
-
 // Fonction pour récupérer les produits depuis l'API
 async function fetchProducts() {
     try {
@@ -30,7 +14,6 @@ async function fetchProducts() {
 
 // Fonction principale pour récupérer les produits et les afficher
 async function displayProductCards(products) {
-    // const products = await fetchProducts();
     if (products) {
         const cardWrapper = document.querySelector('.card_wrapper');
         cardWrapper.innerHTML = '';
@@ -125,7 +108,16 @@ async function filter($filter) {
 
 (async function() {
     const products = await fetchProducts();
-    displayProductCards(products);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const brand = urlParams.get('brand');
+
+    if(brand){
+        const filterValue = brand;
+        const filteredProducts = await filter(filterValue);
+        displayProductCards(filteredProducts);
+    } else {
+        displayProductCards(products);}
 })();
 
 document.getElementById("searchBar").addEventListener('input', async function() {
@@ -133,4 +125,6 @@ document.getElementById("searchBar").addEventListener('input', async function() 
     const filteredProducts = await filter(filterValue);
     displayProductCards(filteredProducts);
 });
+
+
 
