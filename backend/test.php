@@ -13,5 +13,8 @@ echo '<pre>';
 // Accéder aux données produits (en supposant que les données sont dans le troisième élément du tableau)
 $productsData = $product[2]['data'];
 
+$product = new Product();
+$product->getAllProduct();
+var_dump ($product->getAllProduct());
 // Afficher un produit spécifique pour vérification
 var_dump($productsData);

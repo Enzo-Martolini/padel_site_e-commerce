@@ -2,7 +2,7 @@ var banner = document.getElementById("banner");
 
 function afficherBanner(number) {
   if (number === 1) {
-    banner.innerHTML="";
+    banner.innerHTML = "";
     var a = document.createElement("a");
     var imageA = document.createElement("img");
     imageA.className = "h-72";
@@ -11,7 +11,7 @@ function afficherBanner(number) {
     a.href = "#";
     banner.appendChild(a);
   } else if (number === 2) {
-    console.log('hehehe')
+    console.log("hehehe");
     return `
     <div class="flex " id="newProduct" style="background-color: #edf6f9">
       <div
@@ -34,7 +34,7 @@ function afficherBanner(number) {
             <div class="mt-4 flex-column">
               <div>
                 <h3 class="text-sm text-gray-700">
-                  <a href="#">
+                  <a href="details.php">
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     Paire de chaussures Kuikma
                   </a>
@@ -110,17 +110,17 @@ function afficherBanner(number) {
   }
 }
 afficherBanner(1);
-function carouselBanner(){
-  let valeur=1
-  setInterval(function(){
-    valeur= (valeur===1) ? 2:1;
-    if(valeur===1){
-      console.log(1)
+function carouselBanner() {
+  let valeur = 1;
+  setInterval(function () {
+    valeur = valeur === 1 ? 2 : 1;
+    if (valeur === 1) {
+      console.log(1);
       afficherBanner(1);
-    } else{
+    } else {
       banner.innerHTML = afficherBanner(2);
-      console.log(2)
+      console.log(2);
     }
-  }, 5000)
+  }, 5000);
 }
 carouselBanner();

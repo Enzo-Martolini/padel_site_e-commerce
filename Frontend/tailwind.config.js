@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./components/*.{js,ts,jsx,tsx}"],
+  content: ["./*.{html,css,js,jsx}", "./components/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        'lobster-two': ['"Lobster Two"', 'sans-serif'],
+        "lobster-two": ['"Lobster Two"', "sans-serif"],
       },
     },
   },

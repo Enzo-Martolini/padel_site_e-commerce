@@ -1,4 +1,4 @@
-<?php include 'backend/api.php' ?>
+<?php require_once(__DIR__ . '/classes/product.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,9 @@
 </head>
 <body>
     <?php 
-    $product = getProduct();
+    $products = new Product();
+    $product = $products->getAllProduct();
+    var_dump('test');
     foreach ($product as $data){
        if (isset($data['img_src'])) {
             echo '<img src="'. $data['img_src'].'"></br>' ;
