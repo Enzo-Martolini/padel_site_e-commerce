@@ -1,18 +1,19 @@
 <?php
 
 require_once __DIR__ . '/../database.php';
-class Order {
-    private $pdo;
-
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+class Order extends Bdd {
+    public $pdo;
+    
+    public function __construct() {
+        parent::__construct();
     }
+
 
     public function getOrder($id_command) {
 
         $data = [];
 
-        $ins = $this->pdo->prepare("SELECT * FROM historical WHERE id_command = ?");
+        $ins = $this->bdd->prepare("SELECT * FROM historical WHERE id_command = ?");
         $ins->setFetchMode(PDO::FETCH_ASSOC);
         $ins->execute(array($id_command));
 
