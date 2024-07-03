@@ -66,10 +66,10 @@ if (!isset($_SESSION['id'])){
         </form>
     </div>
     <?php
-        $order = new Order($pdo);
-        $product = new Product($pdo);
+        $order = new Order();
+        $product = new Product();
 
-        $user = new User($pdo);
+        $user = new User();
         $data = $user->getCommand($_SESSION['id']);
     
         if (isset($data) && $data !== true) {

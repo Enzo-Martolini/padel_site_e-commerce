@@ -7,7 +7,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role']!=='admin'){
 }
 
 include "../../backend/classes/product.php";
-$product = new Product($pdo);
+$product = new Product();
 $data = $product->getAllProduct()?>
 <!DOCTYPE html>
 <html lang="en">

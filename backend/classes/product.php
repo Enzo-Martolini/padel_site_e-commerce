@@ -1,17 +1,16 @@
 <?php
-require_once(__DIR__ . '/../Bdd.php');
+require_once(__DIR__ . '/../database.php');
 
 class Product extends Bdd {
     public $pdo;
     
     public function __construct() {
         parent::__construct();
-       // This line is actually redundant, you can remove it
     }
 
     public function getAllProduct(){
         try {
-        $ins = $this->pdo->prepare("SELECT * FROM product");
+        $ins = $this->bdd->prepare("SELECT * FROM product");
         $ins->setFetchMode(PDO::FETCH_ASSOC);
         $ins->execute();
 
@@ -27,7 +26,7 @@ class Product extends Bdd {
         $category = json_encode([$type]);
         $subcategory = json_encode([$gender, $brand]);
         try {
-            $ins = $this->pdo->prepare("INSERT INTO `product`(`name`, `description`, `price`, `category`, `subcategory`, `img_src`, `note`) VALUES (:name, :description, :price, :category, :subcategory, :img_src, null)");
+            $ins = $this->bdd->prepare("INSERT INTO `product`(`name`, `description`, `price`, `category`, `subcategory`, `img_src`, `note`) VALUES (:name, :description, :price, :category, :subcategory, :img_src, null)");
             $ins->execute(array(
                 ":name"=>$name,
                 ":description"=>$description,
@@ -43,7 +42,7 @@ class Product extends Bdd {
     }
     public function deleteProduct($id_product){
         try {
-        $ins = $this->pdo->prepare("DELETE FROM `product` WHERE id=?");
+        $ins = $this->bdd->prepare("DELETE FROM `product` WHERE id=?");
         $ins->execute(array($id_product));
         } catch (PDOException $e){
             echo "Erreur : " . $e->getMessage();
@@ -54,7 +53,7 @@ class Product extends Bdd {
 
             $category = json_encode($category);
             $subcategory = json_encode($subcategory);
-            $ins = $this->pdo->prepare("UPDATE `product` SET `name`=:name,`description`=:description,`price`=:price,`category`=:category,`subcategory`=:subcategory WHERE id= :id_product");
+            $ins = $this->bdd->prepare("UPDATE `product` SET `name`=:name,`description`=:description,`price`=:price,`category`=:category,`subcategory`=:subcategory WHERE id= :id_product");
             $ins->execute(array(
                 ':id_product'=>$id_product,
                 ':name'=>$name,

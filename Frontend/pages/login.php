@@ -1,6 +1,6 @@
 <?php 
 include_once "../../backend/classes/user.php";
-$user = new User($pdo);
+$user = new User();
 
 if (isset($_POST['mail']) && isset($_POST["password"])){
 
