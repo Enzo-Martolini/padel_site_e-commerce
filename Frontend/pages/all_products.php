@@ -1,10 +1,3 @@
-<?php
-require_once '../../backend/classes/product.php';
-$products = new product($pdo);
-$product = $products -> getAllProduct();
-$brand = json_decode($product[1]['subcategory']);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +6,14 @@ $brand = json_decode($product[1]['subcategory']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="css/test_card.css">
+    <link rel="stylesheet" href="css/all_product.css">
     <link rel="stylesheet" href="../style.css" />
      <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
 <body>
+    <div id="header"></div> 
+
     <script type="module">
       import { AfficherHeader } from "../components/Header.js";
       document.addEventListener("DOMContentLoaded", () => {
@@ -27,12 +22,17 @@ $brand = json_decode($product[1]['subcategory']);
       });
     </script>
 
-    <div id="header"></div> 
+    <div class="divSearchBar">
+        <form action="" method="">
+          <input type="text" placeholder="Faites une recherche" id="searchBar"><div class="divImage"><button><img src="../assets/icon-glass.png" width="20px"></button></div></input>
+        </form>
+    </div>
+
     <div class="card_container">
         <div class="card_wrapper" style="display:grid">
 
         </div>
     </div>
-    <script src="../script/get_product.js"></script>
+    <script src="../script/products.js"></script>
 </body>
 </html>

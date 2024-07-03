@@ -50,3 +50,37 @@ body {
     height: 100%;
     margin: 2%;
 }
+
+.divSearchBar {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    margin: 2% 0%;
+}
+
+.divSearchBar input {
+    width: 150%;
+    padding: 2%;
+    border-radius: 100rem 0rem 0rem 100rem;
+}
+
+.divSearchBar .divImage {
+    display: flex;
+    border: #006D77 solid 2px;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    width: 20%;
+    border-radius: 0rem 100rem 100rem 0rem;
+}
+
+.divSearchBar [type="text"] {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}

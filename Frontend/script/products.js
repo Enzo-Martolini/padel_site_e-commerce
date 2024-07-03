@@ -29,10 +29,11 @@ async function fetchProducts() {
 }
 
 // Fonction principale pour récupérer les produits et les afficher
-async function displayProductCards() {
-    const products = await fetchProducts();
+async function displayProductCards(products) {
+    // const products = await fetchProducts();
     if (products) {
         const cardWrapper = document.querySelector('.card_wrapper');
+        cardWrapper.innerHTML = '';
         
         products.forEach(product => {
             const category = JSON.parse(product.category);
@@ -102,5 +103,34 @@ async function displayProductCards() {
     }
 }
 
-displayProductCards()
+async function filter($filter) {
+    const products = await fetchProducts();
+    if (products) {
+        const filteredProducts = products.filter(product => {
+            const category = JSON.parse(product.category);
+            const subcategory = JSON.parse(product.subcategory);
+            const brand = subcategory[0];
+            const gender = subcategory[1] || '';
+
+            return product.name.includes($filter) ||
+                product.description.includes($filter) ||
+                category.includes($filter) ||
+                brand.includes($filter) ||
+                gender.includes($filter);
+        });
+        return filteredProducts;
+    }
+    return [];
+}
+
+(async function() {
+    const products = await fetchProducts();
+    displayProductCards(products);
+})();
+
+document.getElementById("searchBar").addEventListener('input', async function() {
+    const filterValue = this.value;
+    const filteredProducts = await filter(filterValue);
+    displayProductCards(filteredProducts);
+});
 
