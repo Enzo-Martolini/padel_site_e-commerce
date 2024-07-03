@@ -1,5 +1,10 @@
 // ./pages/Layout/components/Header.js
-export function createHoverModal(link, categories, brands) {
+
+let type = "";
+export function createHoverModal(link, categories, brands, dataset) {
+  type=dataset  
+  // console.log('Cat' + categories)
+  // console.log('Marque' + brands)
   // Create modal container
   const modalContainer = document.createElement("div");
   modalContainer.className =
@@ -48,6 +53,8 @@ export function createHoverModal(link, categories, brands) {
     linkItem.href = `#${brand.toLowerCase()}`;
     linkItem.className = "text-black hover:underline";
     linkItem.textContent = brand;
+    let closestNav = linkItem.closest('nav');
+    linkItem.href = `all_products.php?brand=${encodeURIComponent(brand)}&type=${encodeURI(type)}`;  // Redirection vers products.html avec la marque
     listItem.appendChild(linkItem);
     brandsList.appendChild(listItem);
   });
@@ -114,6 +121,7 @@ export function AfficherHeader() {
   links.forEach((text) => {
     const link = document.createElement("a");
     link.href = "./products.php";
+    link.dataset.category = text;
     link.textContent = text;
     link.id = "productBalls";
     link.className = "text-xl px-8 font-bold hover-link"; // Add hover-link class
@@ -134,7 +142,8 @@ export function AfficherHeader() {
           "Nox",
           "Adidas",
         ];
-        createHoverModal(link, categories, brands);
+        let dataset = link.dataset.category
+        createHoverModal(link, categories, brands, dataset);
       });
     }
 
@@ -150,7 +159,8 @@ export function AfficherHeader() {
           "Nox",
           "Adidas",
         ];
-        createHoverModal(link, categories, brands);
+        let dataset = link.dataset.category
+        createHoverModal(link, categories, brands, dataset);
       });
     }
 
@@ -166,7 +176,8 @@ export function AfficherHeader() {
           "Nox",
           "Adidas",
         ];
-        createHoverModal(link, categories, brands);
+        let dataset = link.dataset.category
+        createHoverModal(link, categories, brands, dataset);      
       });
     }
   });

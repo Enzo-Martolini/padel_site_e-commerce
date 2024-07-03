@@ -362,5 +362,6 @@
       </div>
     </footer>
     <script src="/script/banner.js"></script>
+    <script src="/script/index.js"></script>
   </body>
 </html>

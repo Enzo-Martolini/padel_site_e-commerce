@@ -10,8 +10,7 @@
     border: solid #01555C 0.2rem;
     border-radius: 10px ;
     flex-direction: column;
-    width: 15%;
-    height: 5%;
+    width: 15rem;
 }
 
 .card img {

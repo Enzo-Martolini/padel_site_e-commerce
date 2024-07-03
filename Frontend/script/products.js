@@ -1,44 +1,130 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const fetchProductsLink = document.getElementById("productsBalls");
+// Fonction pour récupérer les produits depuis l'API
+async function fetchProducts() {
+    try {
+        const response = await fetch('/backend/routes/get_product.php');
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.status + ' ' + response.statusText);
+        }
+        const data = await response.json();
+        return data; // Retourner les données des produits
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
 
-  fetchProductsLink.addEventListener("click", function (event) {
-    event.preventDefault(); // Empêche le lien de naviguer
+// Fonction principale pour récupérer les produits et les afficher
+async function displayProductCards(products) {
+    if (products) {
+        const cardWrapper = document.querySelector('.card_wrapper');
+        cardWrapper.innerHTML = '';
+        
+        products.forEach(product => {
+            const category = JSON.parse(product.category);
+            const subcategory = JSON.parse(product.subcategory);
 
-    // Faire la requête à l'API
-    fetch("../../backend/classes/product.php?action=getAllProduct")
-      .then((response) => response.json())
-      .then((products) => {
-        displayProducts(products);
-      })
-      .catch((error) => console.error("Erreur:", error));
-  });
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.border = 'solid #01555C 2px';
+            card.style.width = '250px';
 
-  function displayProducts(products) {
-    const productsContainer = document.getElementById("products-container");
+            const img = document.createElement('img');
+            img.src = `../../${product.img_src}`;
+            img.alt = '';
+            img.style.width = '250px';
+            card.appendChild(img);
 
-    productsContainer.innerHTML = ""; // Vide le conteneur avant d'ajouter les nouveaux produits
+            const description = document.createElement('div');
+            description.className = 'description';
+            card.appendChild(description);
 
-    products.forEach((product) => {
-      const productCard = `
-        <div class="group relative">
-          <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-            <img src="${product.img_src}" alt="${product.name}" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-          </div>
-          <div class="mt-4 flex justify-between">
-            <div>
-              <h3 class="text-sm text-gray-700">
-                <a href="#">
-                  <span aria-hidden="true" class="absolute inset-0"></span>
-                  ${product.name}
-                </a>
-              </h3>
-              <p class="mt-1 text-sm text-gray-500">${product.description}</p>
-            </div>
-            <p class="text-sm font-medium text-gray-900">${product.price}</p>
-          </div>
-        </div>
-      `;
-      productsContainer.innerHTML += productCard;
-    });
-  }
+            const ul = document.createElement('ul');
+            ul.className = 'card_list';
+
+            const liName = document.createElement('li');
+            liName.className = 'card_name';
+            liName.textContent = product.name;
+            ul.appendChild(liName);
+
+            const liPrice = document.createElement('li');
+            liPrice.className = 'card_price';
+            liPrice.textContent = `${product.price} €`;
+            ul.appendChild(liPrice);
+
+            const liType = document.createElement('li');
+            liType.className = 'card_brand';
+            liType.textContent = category
+            ul.appendChild(liType);
+            
+            const liBrand = document.createElement('li');
+            liBrand.className = 'card_gender';
+            liBrand.textContent = subcategory[0]
+            ul.appendChild(liBrand);
+
+            const liGender = document.createElement('li');
+            liGender.className = 'card_gender';
+            liGender.textContent = subcategory[1]
+            ul.appendChild(liGender);
+
+            description.appendChild(ul);
+
+            const button = document.createElement('button');
+            button.className = 'card_button';
+
+            const buttonImg = document.createElement('img');
+            buttonImg.src = '../assets/icon-shopping-cart.png';
+            buttonImg.alt = '';
+            buttonImg.width = 35;
+            buttonImg.className = 'addToCart';
+            button.appendChild(buttonImg);
+
+            card.appendChild(button);
+
+            cardWrapper.appendChild(card);
+        });
+    } else {
+        console.error('No products data received');
+    }
+}
+
+async function filter($filter) {
+    const products = await fetchProducts();
+    if (products) {
+        const filteredProducts = products.filter(product => {
+            const category = JSON.parse(product.category);
+            const subcategory = JSON.parse(product.subcategory);
+            const brand = subcategory[0];
+            const gender = subcategory[1] || '';
+
+            return product.name.includes($filter) ||
+                product.description.includes($filter) ||
+                category.includes($filter) ||
+                brand.includes($filter) ||
+                gender.includes($filter);
+        });
+        return filteredProducts;
+    }
+    return [];
+}
+
+(async function() {
+    const products = await fetchProducts();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const brand = urlParams.get('brand');
+
+    if(brand){
+        const filterValue = brand;
+        const filteredProducts = await filter(filterValue);
+        displayProductCards(filteredProducts);
+    } else {
+        displayProductCards(products);}
+})();
+
+document.getElementById("searchBar").addEventListener('input', async function() {
+    const filterValue = this.value;
+    const filteredProducts = await filter(filterValue);
+    displayProductCards(filteredProducts);
 });
+
+
+
