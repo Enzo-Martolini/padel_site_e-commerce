@@ -1,11 +1,10 @@
 // ./pages/Layout/components/Header.js
 
 let type = "";
+const basePath = `${window.location.origin}/Frontend/pages`
+const basePathIndex = `${window.location.origin}/Frontend`
 export function createHoverModal(link, categories, brands, dataset) {
-  type=dataset  
-  // console.log('Cat' + categories)
-  // console.log('Marque' + brands)
-  // Create modal container
+  type=dataset
   const modalContainer = document.createElement("div");
   modalContainer.className =
     "fixed flex items-center justify-center bg-opacity-50 hidden";
@@ -33,6 +32,7 @@ export function createHoverModal(link, categories, brands, dataset) {
     linkItem.href = `#${category.toLowerCase()}`;
     linkItem.className = "text-black hover:underline";
     linkItem.textContent = category;
+    linkItem.href = `${basePath}/all_products.php?brand=${encodeURIComponent(category)}&type=${encodeURI(type)}`;  // Redirection vers products.html avec la marque
     listItem.appendChild(linkItem);
     categoriesList.appendChild(listItem);
   });
@@ -54,7 +54,7 @@ export function createHoverModal(link, categories, brands, dataset) {
     linkItem.className = "text-black hover:underline";
     linkItem.textContent = brand;
     let closestNav = linkItem.closest('nav');
-    linkItem.href = `all_products.php?brand=${encodeURIComponent(brand)}&type=${encodeURI(type)}`;  // Redirection vers products.html avec la marque
+    linkItem.href = `${basePath}/all_products.php?brand=${encodeURIComponent(brand)}&type=${encodeURI(type)}`;  // Redirection vers products.html avec la marque
     listItem.appendChild(linkItem);
     brandsList.appendChild(listItem);
   });
@@ -107,7 +107,7 @@ export function AfficherHeader() {
   const logoLink = document.createElement("a");
   logoLink.href = "./index.php";
   const logo = document.createElement("img");
-  logo.src = "./assets/logo-png-removebg-preview.png";
+  logo.src = basePathIndex + "/assets/logo-png-removebg-preview.png";
   logo.alt = "Logo";
   logo.className = "h-12";
   logoLink.appendChild(logo);
@@ -191,7 +191,7 @@ export function AfficherHeader() {
   const profileLink = document.createElement("a");
   profileLink.href = "#";
   const profileIcon = document.createElement("img");
-  profileIcon.src = "./assets/icons8-user-96.png";
+  profileIcon.src = basePathIndex +"/assets/icons8-user-96.png";
   profileIcon.alt = "Profile";
   profileIcon.className = "h-9 border-r-2 p-1 border-black size-9";
   profileLink.appendChild(profileIcon);
@@ -208,7 +208,7 @@ export function AfficherHeader() {
   // Add the menu items
   dropdownMenu.innerHTML = `
   <div class="py-1" role="none">
-    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">Voir Profil</a>
+    <a href="/path/to/profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">Voir Profil</a>
     <form method="POST" action="#" role="none">
       <button type="submit" class="block w-full px-4 py-2 text-left text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Déconnexion</button>
     </form>
@@ -223,7 +223,7 @@ export function AfficherHeader() {
   const cartLink = document.createElement("a");
   cartLink.href = "#";
   const cartIcon = document.createElement("img");
-  cartIcon.src = "./assets/icons8-shopping-cart-90.png";
+  cartIcon.src = basePathIndex +"/assets/icons8-shopping-cart-90.png";
   cartIcon.alt = "Cart";
   cartIcon.className = "h-8 px-2";
   cartLink.appendChild(cartIcon);
