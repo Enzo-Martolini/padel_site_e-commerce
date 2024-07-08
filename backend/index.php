@@ -19,8 +19,8 @@
         }
     }
     
-    session_start();
-    echo $_SESSION['name'];
+   
+   
     ?>
 </body>
 </html>

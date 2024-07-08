@@ -98,7 +98,7 @@ export function AfficherHeader() {
 
   // Logo
   const logoLink = document.createElement("a");
-  logoLink.href = "./index.php";
+  logoLink.href = "./index.html";
   const logo = document.createElement("img");
   logo.src = "./assets/logo-png-removebg-preview.png";
   logo.alt = "Logo";
@@ -113,7 +113,7 @@ export function AfficherHeader() {
   const links = ["Raquettes", "Chaussures", "Sacs", "Balles"];
   links.forEach((text) => {
     const link = document.createElement("a");
-    link.href = "./products.php";
+    link.href = "./products.html";
     link.textContent = text;
     link.id = "productBalls";
     link.className = "text-xl px-8 font-bold hover-link"; // Add hover-link class

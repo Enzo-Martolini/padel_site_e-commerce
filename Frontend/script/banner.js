@@ -34,7 +34,7 @@ function afficherBanner(number) {
             <div class="mt-4 flex-column">
               <div>
                 <h3 class="text-sm text-gray-700">
-                  <a href="details.php">
+                  <a href="details.html">
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     Paire de chaussures Kuikma
                   </a>
